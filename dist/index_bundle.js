@@ -300,9 +300,55 @@ function inferColumns(rows) {
 var d3_request = __webpack_require__(17);
 var d3_queue = __webpack_require__(14);
 
+function continentFind(countries, continent) {
+  // Match the continent with the user input
+  var cont = countries.filter(function (country) {
+    return country.continent === continent;
+  });
+  return cont;
+}
+
+function resortMatch(areas, resorts, tours) {
+  var objectFind = {};
+  // Iterate over all resorts and countries
+
+  var _loop = function _loop(i) {
+    var _loop2 = function _loop2(y) {
+      // Get the arrays of all tours for each resort
+      resorts[y].tours = tours.filter(function (tour) {
+        return tour.resort_id === resorts[y].id;
+      });
+    };
+
+    for (var y = 0; y < resorts.length; y++) {
+      _loop2(y);
+    }
+    // store each resort under their name in the object
+    objectFind["" + areas[i].name] = resorts.filter(function (resort) {
+      return resort.Country === areas[i].name;
+    });
+  };
+
+  for (var i = 0; i < areas.length; i++) {
+    _loop(i);
+  }
+  return objectFind;
+}
+
 function ready(err, data) {
+  // Mock user input
+  var continent = "Asia";
+  var price = 4000;
+  var days = 10;
+  // Get continent data
+  var selectedWorldArea = continentFind(data[0], continent);
+  // Get resort and tour matchup
+  var resortsAndActivities = resortMatch(selectedWorldArea, data[1], data[2]);
+  // work out what to return based on price and trip duration
+  var tripResults = tripMatch(resortsAndActivities, price, days);
   debugger;
 }
+// Load all the data into a callback function
 d3_queue.queue().defer(d3_request.json, "../data/countries.json").defer(d3_request.json, "../data/resorts.json").defer(d3_request.json, "../data/tours.json").awaitAll(ready);
 
 /***/ }),
