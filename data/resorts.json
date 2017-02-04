@@ -1,0 +1,11 @@
+[{"id":1,"name":"Kuta Paradiso","price_per_night":"$200","Country":"Bali"},
+{"id":2,"name":"Padma Resort Legian","price_per_night":"$528","Country":"Bali"},
+{"id":3,"name":"Grand Aston","price_per_night":"$332","Country":"Bali"},
+{"id":4,"name":"Rizzan Sea-Park Hotel Tancha-Bay","price_per_night":"$258","Country":"Japan"},
+{"id":5,"name":"Hotel Orion Motobu Resort & Spa","price_per_night":"$826","Country":"Japan"},
+{"id":6,"name":"Condominium Hotel Monpa","price_per_night":"$322","Country":"Japan"},
+{"id":7,"name":"Okinawa Kariyushi Beach Resort Ocean Spa","price_per_night":"$426","Country":"Japan"},
+{"id":8,"name":"Occidental Atenea Mar - Adults Only","price_per_night":"$208","Country":"Spain"},
+{"id":9,"name":"Hotel SB Icaria barcelona","price_per_night":"$208","Country":"Spain"},
+{"id":10,"name":"Hotel ILUNION Barcelona","price_per_night":"$148","Country":"Spain"},
+{"id":11,"name":"W Barcelona","price_per_night":"$728","Country":"Spain"}]
