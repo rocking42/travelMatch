@@ -335,6 +335,8 @@ function resortMatch(areas, resorts, tours) {
   return objectFind;
 }
 
+function tripMatch(tripData, price, days) {}
+
 function ready(err, data) {
   // Mock user input
   var continent = "Asia";
@@ -348,6 +350,7 @@ function ready(err, data) {
   var tripResults = tripMatch(resortsAndActivities, price, days);
   debugger;
 }
+
 // Load all the data into a callback function
 d3_queue.queue().defer(d3_request.json, "../data/countries.json").defer(d3_request.json, "../data/resorts.json").defer(d3_request.json, "../data/tours.json").awaitAll(ready);
 
