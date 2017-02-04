@@ -1,42 +1,38 @@
 const d3_request = require("d3-request");
 const d3_queue = require("d3-queue");
+import {
+  continentFind,
+  resortMatch,
+  resortFilter,
+  tripMatch
+} from "./countryMung.js";
 
-function continentFind(countries, continent) {
-  // Match the continent with the user input
-  const cont = countries.filter((country) => country.continent === continent);
-  return cont;
-}
-
-function resortMatch(areas, resorts, tours) {
-  const objectFind = {};
-  // Iterate over all resorts and countries
-  for (let i = 0; i < areas.length; i++) {
-    for (let y = 0; y < resorts.length; y++) {
-      // Get the arrays of all tours for each resort
-      resorts[y].tours = tours.filter((tour) => tour.resort_id === resorts[y].id);
-    }
-    // store each resort under their name in the object
-    objectFind[`${areas[i].name}`] = resorts.filter((resort) => resort.Country === areas[i].name);
-  }
-  return objectFind;
-}
-
-function tripMatch(tripData, price, days) {
+function tours(tours, days, object) {
 
 }
+
+function tourMatch() {
+
+};
+
+
 
 function ready(err, data) {
   // Mock user input
   const continent = "Asia";
-  const price = 4000;
+  const price = 5000;
   const days = 10;
+  const roomForActivities = 1000;
+  // Destructure the data into varibles
+  const [countries, resorts, tours] = [data[0], data[1], data[2]];
   // Get continent data
-  const selectedWorldArea = continentFind(data[0], continent);
+  const selectedWorldArea = continentFind(countries, continent);
   // Get resort and tour matchup
-  const resortsAndActivities = resortMatch(selectedWorldArea, data[1], data[2]);
+  const resortsAndActivities = resortMatch(selectedWorldArea, resorts, tours);
   // work out what to return based on price and trip duration
-  const tripResults = tripMatch(resortsAndActivities, price, days);
-  debugger;
+  const tripResults = tripMatch(resortsAndActivities, price, days, roomForActivities);
+  // Attach an array to each resort
+  const tourFind = tourMatch(tripResults, price, days);
 }
 
 // Load all the data into a callback function

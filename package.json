@@ -26,7 +26,7 @@
   },
   "scripts": {
     "test": "./node_modules/.bin/mocha --recursive test --reporter spec",
-    "start": "webpack -w"
+    "start": "webpack-dev-server"
   },
   "author": "Ian Tinsley <itinsley@gmail.com> (https://github.com/itinsley)",
   "license": "ISC"
