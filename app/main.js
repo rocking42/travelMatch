@@ -4,18 +4,10 @@ import {
   continentFind,
   resortMatch,
   resortFilter,
-  tripMatch
+  tripMatch,
+  tourMatch,
+  tours
 } from "./countryMung.js";
-
-function tours(tours, days, object) {
-
-}
-
-function tourMatch() {
-
-};
-
-
 
 function ready(err, data) {
   // Mock user input

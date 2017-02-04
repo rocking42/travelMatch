@@ -34,6 +34,32 @@ export function tripMatch(tripData, price, days, activityMoney) {
     // filter out values based on users price
     tripData[prop] = tripData[prop].filter(resortFilter.bind(null, price, days, activityMoney));
   }
-  var priceRemaining = price - activityMoney;
-  debugger;
+  return tripData;
+}
+
+export function tours(price, days, passedTours) {
+  const tourResult = [];
+  let currentItem;
+  while (days > 0) {
+    currentItem = passedTours.find((item) => {
+      if (item.total_price <= price && item.days <= days) {
+        return item
+      }
+    });
+    tourResult.push(currentItem);
+    price -= currentItem.total_price || 0;
+    days -= currentItem.days || 1;
+  }
+  return [tourResult, price];
+}
+
+export function tourMatch(tripObj, price, days) {
+  for (var prop in tripObj) {
+    for (const item of tripObj[prop]) {
+      const tourRes = tours(item.priceRemaining, days, item.tours)
+      item.tourResults = tourRes[0];
+      item.priceRemaining = tourRes[1];
+    }
+  }
+  return tripObj;
 }
