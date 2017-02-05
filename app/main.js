@@ -8,12 +8,15 @@ import {
   tourMatch,
   tours
 } from "./countryMung.js";
+import {
+  showData
+} from "./displayData";
 
 function ready(err, data) {
   // Mock user input
   const continent = "Asia";
-  const price = 5000;
-  const days = 10;
+  const price = 4500;
+  const days = 14;
   const roomForActivities = 1000;
   // Destructure the data into varibles
   const [countries, resorts, tours] = [data[0], data[1], data[2]];
@@ -24,7 +27,9 @@ function ready(err, data) {
   // work out what to return based on price and trip duration
   const tripResults = tripMatch(resortsAndActivities, price, days, roomForActivities);
   // Attach an array to each resort
-  const tourFind = tourMatch(tripResults, price, days);
+  const tourFind = tourMatch(tripResults, roomForActivities, days);
+  // Append the html result to the page
+  const displayData = showData(tourFind, days, price);
 }
 
 // Load all the data into a callback function

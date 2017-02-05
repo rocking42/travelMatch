@@ -23,6 +23,8 @@ export function resortFilter(price, days, activityMoney, resort) {
   if (resortPrice * days < price - activityMoney) {
     // Add remaining funds for activities for later use
     resort.priceRemaining = price - resortPrice * days;
+    resort.totalPrice = resortPrice * days;
+    resort.hotelPrice = resortPrice * days;
   }
   // Return any values that are greater than the price minus funds for activities
   return resortPrice * days < price - activityMoney;
@@ -46,9 +48,13 @@ export function tours(price, days, passedTours) {
         return item
       }
     });
-    tourResult.push(currentItem);
-    price -= currentItem.total_price || 0;
-    days -= currentItem.days || 1;
+    if (currentItem) {
+      tourResult.push(currentItem);
+      price -= currentItem.total_price;
+      days -= currentItem.days;
+    } else {
+      days -= days;
+    }
   }
   return [tourResult, price];
 }
@@ -56,9 +62,10 @@ export function tours(price, days, passedTours) {
 export function tourMatch(tripObj, price, days) {
   for (var prop in tripObj) {
     for (const item of tripObj[prop]) {
-      const tourRes = tours(item.priceRemaining, days, item.tours)
+      const tourRes = tours(price, days, item.tours)
       item.tourResults = tourRes[0];
       item.priceRemaining = tourRes[1];
+      item.totalPrice += tourRes[0].reduce((prev, next) => prev + next.total_price, 0)
     }
   }
   return tripObj;
