@@ -43,6 +43,7 @@ export function tours(price, days, passedTours) {
   const tourResult = [];
   let currentItem;
   while (days > 0) {
+    // Find the first tour that is within the price range and has enough days to attend
     currentItem = passedTours.find((item) => {
       if (item.total_price <= price && item.days <= days) {
         return item
@@ -53,6 +54,7 @@ export function tours(price, days, passedTours) {
       price -= currentItem.total_price;
       days -= currentItem.days;
     } else {
+      // Validation if no suitable tour can be found
       days -= days;
     }
   }
@@ -60,9 +62,11 @@ export function tours(price, days, passedTours) {
 }
 
 export function tourMatch(tripObj, price, days) {
+  // Iterate over all the data and add resulting tours based off price and length of stay
   for (var prop in tripObj) {
     for (const item of tripObj[prop]) {
       const tourRes = tours(price, days, item.tours)
+      // Attach the result to the given object
       item.tourResults = tourRes[0];
       item.priceRemaining = tourRes[1];
       item.totalPrice += tourRes[0].reduce((prev, next) => prev + next.total_price, 0)
