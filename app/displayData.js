@@ -14,8 +14,11 @@
 // Total Activity Days:  10
 
 export function showData(tourData, days, price) {
+  // Iterate over all data
   for(const prop in tourData) {
+    // If data is present
     if(tourData[prop]) {
+      // Create variables from each resort
       for (const selectedResort of tourData[prop]) {
       const country = selectedResort.Country;
       const resort = selectedResort.name;
@@ -23,13 +26,14 @@ export function showData(tourData, days, price) {
       const grandTotal = selectedResort.totalPrice;
       const allTours = [];
       let activityDays = 0;
+      // Create the tours template
       for(const tour of selectedResort.tourResults) {
         activityDays += tour.days
         allTours.push(
           `<p>${tour.description}: $${tour.total_price}</p>`
         );
       }
-
+      // Add all variables to the resulting template
       const template = `
       <h3>Package</h3>
       <p>=======</p>
@@ -41,6 +45,7 @@ export function showData(tourData, days, price) {
       <h3>grand total: $${grandTotal}</h3>
       <p>Total activity day's: ${activityDays}</p>
       `;
+      // Add template to page
       var div = document.createElement("div");
       div.innerHTML = template;
       document.body.append(div);
